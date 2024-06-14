@@ -182,7 +182,7 @@ Resources:
       DBClusterIdentifier: !Ref DatabaseCluster
       DBInstanceClass: !Ref DatabaseInstanceType
       DBSubnetGroupName: !Ref DataSubnetGroup
-      Engine: aurora
+      Engine: aurora-mysql
       Tags:
         - Key: Name
           Value: !Join [ '', [ 'WordPress / ', !Ref 'AWS::StackName' ] ]
