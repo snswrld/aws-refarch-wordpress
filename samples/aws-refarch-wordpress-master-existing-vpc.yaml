@@ -909,7 +909,7 @@ Resources:
                 ]
               ]
             ]
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-03-bastion.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-03-bastion.yaml
   cloudfront:
     Condition: DeployCloudFront
     DependsOn: [ publicalb, web ]
@@ -922,7 +922,7 @@ Resources:
           !GetAtt [ publicalb, Outputs.PublicAlbDnsName ]
         WPDomainName:
           !Ref WPDomainName
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-04-cloudfront.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-04-cloudfront.yaml
   dashboardwithalarms:
     Condition: EfsCreateAlarms
     DependsOn: [ securitygroups, publicalb, efsfilesystem, rds, efsalarms ]
@@ -945,7 +945,7 @@ Resources:
           !GetAtt [ publicalb, Outputs.PublicAlbFullName ]
         EfsCreateAlarms:
           !Ref EfsCreateAlarms         
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-06-dashboard.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-06-dashboard.yaml
   dashboardwithnoalarms:
     Condition: EfsCreateNoAlarms
     DependsOn: [ securitygroups, publicalb, efsfilesystem, rds ]
@@ -960,7 +960,7 @@ Resources:
           !GetAtt [ publicalb, Outputs.PublicAlbFullName ]
         EfsCreateAlarms:
           !Ref EfsCreateAlarms         
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-06-dashboard.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-06-dashboard.yaml
   efsfilesystem:
     DependsOn: [ securitygroups ]
     Type: AWS::CloudFormation::Stack
@@ -1006,7 +1006,7 @@ Resources:
                 ]
               ]
             ]
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-03-efsfilesystem.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-03-efsfilesystem.yaml
   efsalarms:
     Condition: EfsCreateAlarms
     DependsOn: [ efsfilesystem ]
@@ -1051,7 +1051,7 @@ Resources:
             ]
         WarningThreshold:
           !Ref EfsWarningThreshold
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-03-efsalarms.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-03-efsalarms.yaml
   elasticache:
     Condition: DeployElastiCache
     DependsOn: [ securitygroups ]
@@ -1086,7 +1086,7 @@ Resources:
           !GetAtt [ securitygroups, Outputs.ElastiCacheSecurityGroup ]
         NumberOfSubnets:
           !Ref NumberOfDataSubnets
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-03-elasticache.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-03-elasticache.yaml
   publicalb:
     Condition: AvailableAWSRegion
     DependsOn: [ securitygroups ]
@@ -1123,7 +1123,7 @@ Resources:
           !GetAtt [ securitygroups, Outputs.PublicAlbSecurityGroup ]
         Vpc:
           !Ref VpcId
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-03-publicalb.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-03-publicalb.yaml
   rds:
     Condition: AvailableAWSRegion
     DependsOn: [ securitygroups ]
@@ -1170,7 +1170,7 @@ Resources:
             ]
         NumberOfSubnets:
           !Ref NumberOfDataSubnets
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-03-rds.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-03-rds.yaml
   route53:
     Condition: CreateRecordSet
     DependsOn: [ publicalb, web ]
@@ -1183,7 +1183,7 @@ Resources:
           !If [ DeployCloudFront, 'Z2FDTNDATAQYW2', !GetAtt [ publicalb, Outputs.PublicAlbCanonicalHostedZoneId ] ]
         WPDomainName:
           !Ref WPDomainName
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-05-route53.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-05-route53.yaml
   securitygroups:
     Condition: AvailableAWSRegion
     Type: AWS::CloudFormation::Stack
@@ -1193,7 +1193,7 @@ Resources:
           !Ref SshAccessCidr
         Vpc:
           !Ref VpcId
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-02-securitygroups.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-02-securitygroups.yaml
   web:
     Condition: AvailableAWSRegion
     DependsOn: [ efsfilesystem, publicalb, securitygroups ]
@@ -1270,7 +1270,7 @@ Resources:
           !Ref WPTitle
         WPVersion:
           !Ref WPVersion
-      TemplateURL: https://s3.amazonaws.com/aws-refarch/wordpress/latest/templates/aws-refarch-wordpress-04-web.yaml
+      TemplateURL: https://github.com/snswrld/aws-refarch-wordpress/tree/master/templates/aws-refarch-wordpress-04-web.yaml
 
 Outputs:
 
